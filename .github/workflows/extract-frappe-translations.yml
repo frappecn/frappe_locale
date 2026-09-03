@@ -1,4 +1,4 @@
-name: Extract Frappe translations
+name: Extract Frappe and ERPNext translations
 
 on:
   schedule:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   extract:
-    name: Extract from Frappe (${{ github.ref_name }})
+    name: Extract from Frappe and ERPNext (${{ github.ref_name }})
     runs-on: ubuntu-latest
     env:
       LOCALE: zh
@@ -31,6 +31,14 @@ jobs:
           repository: frappe/frappe
           ref: ${{ github.ref_name }}
           path: .sources/frappe
+          fetch-depth: 1
+
+      - name: Checkout matching ERPNext source
+        uses: actions/checkout@v4
+        with:
+          repository: frappe/erpnext
+          ref: ${{ github.ref_name }}
+          path: .sources/erpnext
           fetch-depth: 1
 
       - name: Set up Python
@@ -54,26 +62,39 @@ jobs:
             --python "$(which python)" \
             --frappe-path "$GITHUB_WORKSPACE/.sources/frappe"
 
-      - name: Generate main.pot and update zh.po
+      - name: Install ERPNext into temporary Bench
         run: |
           cd "$RUNNER_TEMP/frappe-locale-bench"
-          bench generate-pot-file --app frappe
+          bench get-app \
+            --skip-assets \
+            --soft-link \
+            "$GITHUB_WORKSPACE/.sources/erpnext"
 
-          if [ -f "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" ]; then
-            cp "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" \
-              "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/$LOCALE.po"
-          fi
+      - name: Generate and update Frappe and ERPNext translations
+        run: |
+          cd "$RUNNER_TEMP/frappe-locale-bench"
 
-          bench update-po-files --app frappe --locale "$LOCALE"
+          for app in frappe erpnext; do
+            bench generate-pot-file --app "$app"
+
+            if [ -f "$GITHUB_WORKSPACE/translations/$app/$LOCALE.po" ]; then
+              cp "$GITHUB_WORKSPACE/translations/$app/$LOCALE.po" \
+                "$RUNNER_TEMP/frappe-locale-bench/apps/$app/$app/locale/$LOCALE.po"
+            fi
+
+            bench update-po-files --app "$app" --locale "$LOCALE"
+          done
 
       - name: Copy translation files into frappe_locale
         run: |
-          mkdir -p "$GITHUB_WORKSPACE/translations/frappe"
+          for app in frappe erpnext; do
+            mkdir -p "$GITHUB_WORKSPACE/translations/$app"
 
-          cp "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/main.pot" \
-            "$GITHUB_WORKSPACE/translations/frappe/main.pot"
-          cp "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/$LOCALE.po" \
-            "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po"
+            cp "$RUNNER_TEMP/frappe-locale-bench/apps/$app/$app/locale/main.pot" \
+              "$GITHUB_WORKSPACE/translations/$app/main.pot"
+            cp "$RUNNER_TEMP/frappe-locale-bench/apps/$app/$app/locale/$LOCALE.po" \
+              "$GITHUB_WORKSPACE/translations/$app/$LOCALE.po"
+          done
 
       - name: Build untranslated PO for frappe_locale
         run: |
@@ -86,13 +107,15 @@ jobs:
         run: |
           test -s "$GITHUB_WORKSPACE/translations/frappe/main.pot"
           test -s "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po"
+          test -s "$GITHUB_WORKSPACE/translations/erpnext/main.pot"
+          test -s "$GITHUB_WORKSPACE/translations/erpnext/$LOCALE.po"
           test -s "$GITHUB_WORKSPACE/frappe_locale/locale/$LOCALE.po"
           git diff --check
 
       - name: Commit changes
         run: |
-          if [ -z "$(git status --porcelain -- translations/frappe frappe_locale/locale)" ]; then
-            echo "No Frappe translation changes detected."
+          if [ -z "$(git status --porcelain -- translations/frappe translations/erpnext frappe_locale/locale)" ]; then
+            echo "No Frappe or ERPNext translation changes detected."
             exit 0
           fi
 
@@ -102,6 +125,8 @@ jobs:
           git add \
             translations/frappe/main.pot \
             "translations/frappe/$LOCALE.po" \
+            translations/erpnext/main.pot \
+            "translations/erpnext/$LOCALE.po" \
             "frappe_locale/locale/$LOCALE.po"
-          git commit -m "chore: update Frappe translations"
+          git commit -m "chore: update Frappe and ERPNext translations"
           git push origin "HEAD:$GITHUB_REF_NAME"

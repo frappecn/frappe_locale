@@ -2823,7 +2823,7 @@ msgstr ""
 #. 'System Settings'
 #: frappe/core/doctype/system_settings/system_settings.json
 msgid "Maximum total size a ZIP archive is allowed to expand to when extracted."
-msgstr ""
+msgstr "解压时允许 ZIP 压缩包展开的最大总大小。"
 
 #. Option for the 'Attending' (Select) field in DocType 'Event'
 #. Option for the 'Attending' (Select) field in DocType 'Event Participants'
@@ -6364,4 +6364,3 @@ msgstr ""
 #: frappe/website/doctype/web_form/web_form.py:124
 msgid "{0}: Link field cannot reference DocType {1} without Guest read permission"
 msgstr ""
-
