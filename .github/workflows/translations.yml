@@ -1,4 +1,4 @@
-name: Extract Frappe and ERPNext translations
+name: 更新语言包
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: extract-frappe-translations-${{ github.ref_name }}
+  group: translations-${{ github.ref_name }}
   cancel-in-progress: true
 
 permissions:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   extract:
-    name: Extract from Frappe and ERPNext (${{ github.ref_name }})
+    name: Extract from Frappe, ERPNext, HRMS and CRM (${{ github.ref_name }})
     runs-on: ubuntu-latest
     env:
       LOCALE: zh
@@ -41,6 +41,22 @@ jobs:
           path: .sources/erpnext
           fetch-depth: 1
 
+      - name: Checkout matching HRMS source
+        uses: actions/checkout@v7
+        with:
+          repository: frappe/hrms
+          ref: ${{ github.ref_name }}
+          path: .sources/hrms
+          fetch-depth: 1
+
+      - name: Checkout matching CRM source
+        uses: actions/checkout@v7
+        with:
+          repository: frappe/crm
+          ref: ${{ github.ref_name }}
+          path: .sources/crm
+          fetch-depth: 1
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -62,20 +78,23 @@ jobs:
             --python "$(which python)" \
             --frappe-path "$GITHUB_WORKSPACE/.sources/frappe"
 
-      - name: Install ERPNext into temporary Bench
+      - name: Install ERPNext, HRMS and CRM into temporary Bench
         run: |
           cd "$RUNNER_TEMP/frappe-locale-bench"
-          bench get-app \
-            --skip-assets \
-            "$GITHUB_WORKSPACE/.sources/erpnext"
+          for app in erpnext hrms crm; do
+            bench get-app \
+              --skip-assets \
+              "$GITHUB_WORKSPACE/.sources/$app"
+          done
 
-      - name: Generate and update Frappe and ERPNext translations
+      - name: Generate and update Frappe, ERPNext, HRMS and CRM translations
         run: |
           cd "$RUNNER_TEMP/frappe-locale-bench"
 
-          for app in frappe erpnext; do
+          for app in frappe erpnext hrms crm; do
             bench generate-pot-file --app "$app"
 
+            mkdir -p "$RUNNER_TEMP/frappe-locale-bench/apps/$app/$app/locale"
             if [ -f "$GITHUB_WORKSPACE/translations/$app/$LOCALE.po" ]; then
               cp "$GITHUB_WORKSPACE/translations/$app/$LOCALE.po" \
                 "$RUNNER_TEMP/frappe-locale-bench/apps/$app/$app/locale/$LOCALE.po"
@@ -86,7 +105,7 @@ jobs:
 
       - name: Copy translation files into frappe_locale
         run: |
-          for app in frappe erpnext; do
+          for app in frappe erpnext hrms crm; do
             mkdir -p "$GITHUB_WORKSPACE/translations/$app"
 
             cp "$RUNNER_TEMP/frappe-locale-bench/apps/$app/$app/locale/main.pot" \
@@ -99,7 +118,11 @@ jobs:
             "$GITHUB_WORKSPACE/translations/frappe/main.pot" \
             "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" \
             "$GITHUB_WORKSPACE/translations/erpnext/main.pot" \
-            "$GITHUB_WORKSPACE/translations/erpnext/$LOCALE.po"; do
+            "$GITHUB_WORKSPACE/translations/erpnext/$LOCALE.po" \
+            "$GITHUB_WORKSPACE/translations/hrms/main.pot" \
+            "$GITHUB_WORKSPACE/translations/hrms/$LOCALE.po" \
+            "$GITHUB_WORKSPACE/translations/crm/main.pot" \
+            "$GITHUB_WORKSPACE/translations/crm/$LOCALE.po"; do
             perl -0pi -e 's/\n+\z/\n/' "$file"
           done
 
@@ -116,13 +139,17 @@ jobs:
           test -s "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po"
           test -s "$GITHUB_WORKSPACE/translations/erpnext/main.pot"
           test -s "$GITHUB_WORKSPACE/translations/erpnext/$LOCALE.po"
+          test -s "$GITHUB_WORKSPACE/translations/hrms/main.pot"
+          test -s "$GITHUB_WORKSPACE/translations/hrms/$LOCALE.po"
+          test -s "$GITHUB_WORKSPACE/translations/crm/main.pot"
+          test -s "$GITHUB_WORKSPACE/translations/crm/$LOCALE.po"
           test -s "$GITHUB_WORKSPACE/frappe_locale/locale/$LOCALE.po"
           git diff --check
 
       - name: Commit changes
         run: |
-          if [ -z "$(git status --porcelain -- translations/frappe translations/erpnext frappe_locale/locale)" ]; then
-            echo "No Frappe or ERPNext translation changes detected."
+          if [ -z "$(git status --porcelain -- translations/frappe translations/erpnext translations/hrms translations/crm frappe_locale/locale)" ]; then
+            echo "翻译包无变更"
             exit 0
           fi
 
@@ -134,6 +161,10 @@ jobs:
             "translations/frappe/$LOCALE.po" \
             translations/erpnext/main.pot \
             "translations/erpnext/$LOCALE.po" \
+            translations/hrms/main.pot \
+            "translations/hrms/$LOCALE.po" \
+            translations/crm/main.pot \
+            "translations/crm/$LOCALE.po" \
             "frappe_locale/locale/$LOCALE.po"
-          git commit -m "chore: update Frappe and ERPNext translations"
+          git commit -m "chore: 更新语言包"
           git push origin "HEAD:$GITHUB_REF_NAME"
