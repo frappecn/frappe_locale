@@ -1,0 +1,97 @@
+name: Extract Frappe translations
+
+on:
+  schedule:
+    - cron: "30 9 * * 0"
+  workflow_dispatch:
+
+concurrency:
+  group: extract-frappe-translations-${{ github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    name: Extract from Frappe (${{ github.ref_name }})
+    runs-on: ubuntu-latest
+    env:
+      BENCH_DIR: ${{ runner.temp }}/frappe-locale-bench
+      LOCALE: zh
+
+    steps:
+      - name: Checkout frappe_locale
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout matching Frappe source
+        uses: actions/checkout@v4
+        with:
+          repository: frappe/frappe
+          ref: ${{ github.ref_name }}
+          path: .sources/frappe
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Install Bench
+        run: python -m pip install --upgrade pip frappe-bench
+
+      - name: Create temporary Bench
+        run: |
+          bench init "$BENCH_DIR" \
+            --skip-assets \
+            --skip-redis-config-generation \
+            --python "$(which python)" \
+            --frappe-path "$GITHUB_WORKSPACE/.sources/frappe"
+
+      - name: Generate main.pot and update zh.po
+        working-directory: ${{ env.BENCH_DIR }}
+        run: |
+          bench generate-pot-file --app frappe
+
+          if [ -f "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" ]; then
+            cp "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" \
+              "$BENCH_DIR/apps/frappe/frappe/locale/$LOCALE.po"
+          fi
+
+          bench update-po-files --app frappe --locale "$LOCALE"
+
+      - name: Copy translation files into frappe_locale
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/translations/frappe"
+
+          cp "$BENCH_DIR/apps/frappe/frappe/locale/main.pot" \
+            "$GITHUB_WORKSPACE/translations/frappe/main.pot"
+          cp "$BENCH_DIR/apps/frappe/frappe/locale/$LOCALE.po" \
+            "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po"
+
+      - name: Validate generated files
+        run: |
+          test -s "$GITHUB_WORKSPACE/translations/frappe/main.pot"
+          test -s "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po"
+          git diff --check
+
+      - name: Commit changes
+        run: |
+          if [ -z "$(git status --porcelain -- translations/frappe)" ]; then
+            echo "No Frappe translation changes detected."
+            exit 0
+          fi
+
+          git config user.name "frappe-locale-bot"
+          git config user.email "frappe-locale-bot@users.noreply.github.com"
+
+          git add translations/frappe/main.pot "translations/frappe/$LOCALE.po"
+          git commit -m "chore: update Frappe translations"
+          git push origin "HEAD:$GITHUB_REF_NAME"
