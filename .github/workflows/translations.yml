@@ -14,18 +14,18 @@ permissions:
 
 jobs:
   extract:
-    name: Extract from Frappe, ERPNext, HRMS and CRM (${{ github.ref_name }})
+    name: 提取翻译 (${{ github.ref_name }})
     runs-on: ubuntu-latest
     env:
       LOCALE: zh
 
     steps:
-      - name: Checkout frappe_locale
+      - name: 检出 Frappe_locale
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - name: Checkout matching Frappe source
+      - name: 检出 Frappe
         uses: actions/checkout@v7
         with:
           repository: frappe/frappe
@@ -33,7 +33,7 @@ jobs:
           path: .sources/frappe
           fetch-depth: 1
 
-      - name: Checkout matching ERPNext source
+      - name: 检出 ERPNext
         uses: actions/checkout@v7
         with:
           repository: frappe/erpnext
@@ -41,7 +41,7 @@ jobs:
           path: .sources/erpnext
           fetch-depth: 1
 
-      - name: Checkout matching HRMS source
+      - name: 检出 HRMS
         uses: actions/checkout@v7
         with:
           repository: frappe/hrms
@@ -49,7 +49,7 @@ jobs:
           path: .sources/hrms
           fetch-depth: 1
 
-      - name: Checkout matching CRM source
+      - name: 检出 CRM
         uses: actions/checkout@v7
         with:
           repository: frappe/crm
@@ -57,20 +57,20 @@ jobs:
           path: .sources/crm
           fetch-depth: 1
 
-      - name: Set up Python
+      - name: 设置 Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.14"
 
-      - name: Set up Node.js
+      - name: 设置 Node.js
         uses: actions/setup-node@v6
         with:
           node-version: "24"
 
-      - name: Install Bench
+      - name: 按照 Bench
         run: python -m pip install --upgrade pip frappe-bench
 
-      - name: Create temporary Bench
+      - name: 创建临时 Bench 实例
         run: |
           bench init "$RUNNER_TEMP/frappe-locale-bench" \
             --skip-assets \
@@ -78,7 +78,7 @@ jobs:
             --python "$(which python)" \
             --frappe-path "$GITHUB_WORKSPACE/.sources/frappe"
 
-      - name: Install ERPNext, HRMS and CRM into temporary Bench
+      - name: 安装到临时 Bench 实例
         run: |
           cd "$RUNNER_TEMP/frappe-locale-bench"
           for app in erpnext hrms crm; do
@@ -87,7 +87,7 @@ jobs:
               "$GITHUB_WORKSPACE/.sources/$app"
           done
 
-      - name: Generate and update Frappe, ERPNext, HRMS and CRM translations
+      - name: 生成并更新翻译包
         run: |
           cd "$RUNNER_TEMP/frappe-locale-bench"
 
@@ -103,7 +103,7 @@ jobs:
             bench update-po-files --app "$app" --locale "$LOCALE"
           done
 
-      - name: Copy translation files into frappe_locale
+      - name: 将翻译包复制到 Frappe_locale
         run: |
           for app in frappe erpnext hrms crm; do
             mkdir -p "$GITHUB_WORKSPACE/translations/$app"
@@ -126,14 +126,14 @@ jobs:
             perl -0pi -e 's/\n+\z/\n/' "$file"
           done
 
-      - name: Build untranslated PO for frappe_locale
+      - name: 构建待翻译的 PO 文件
         run: |
           "$RUNNER_TEMP/frappe-locale-bench/env/bin/python" \
             "$GITHUB_WORKSPACE/scripts/extract_untranslated_po.py" \
             "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" \
             "$GITHUB_WORKSPACE/frappe_locale/locale/$LOCALE.po"
 
-      - name: Validate generated files
+      - name: 校验生成的文件
         run: |
           test -s "$GITHUB_WORKSPACE/translations/frappe/main.pot"
           test -s "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po"
@@ -146,7 +146,7 @@ jobs:
           test -s "$GITHUB_WORKSPACE/frappe_locale/locale/$LOCALE.po"
           git diff --check
 
-      - name: Commit changes
+      - name: 提交变更
         run: |
           if [ -z "$(git status --porcelain -- translations/frappe translations/erpnext translations/hrms translations/crm frappe_locale/locale)" ]; then
             echo "翻译包无变更"
