@@ -21,12 +21,12 @@ jobs:
 
     steps:
       - name: Checkout frappe_locale
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Checkout matching Frappe source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: frappe/frappe
           ref: ${{ github.ref_name }}
@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 1
 
       - name: Checkout matching ERPNext source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: frappe/erpnext
           ref: ${{ github.ref_name }}
