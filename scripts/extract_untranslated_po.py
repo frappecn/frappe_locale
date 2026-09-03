@@ -18,9 +18,46 @@ def is_untranslated(message: Message) -> bool:
 	return not message.string
 
 
-def extract_untranslated(source: Path, output: Path) -> tuple[int, int]:
+def has_translation(message: Message) -> bool:
+	"""Return whether a message contains any manual translation value."""
+	if isinstance(message.string, dict):
+		return any(bool(value) for value in message.string.values())
+
+	return bool(message.string)
+
+
+def add_message(target: Catalog, source: Message, translation: Message | None = None) -> None:
+	"""Add a source message, optionally using a translation from the existing output."""
+	message = translation or source
+	flags = list(dict.fromkeys((*source.flags, *message.flags)))
+	auto_comments = list(dict.fromkeys((*source.auto_comments, *message.auto_comments)))
+	user_comments = list(dict.fromkeys((*source.user_comments, *message.user_comments)))
+
+	target.add(
+		source.id,
+		string=message.string,
+		locations=source.locations,
+		flags=flags,
+		auto_comments=auto_comments,
+		user_comments=user_comments,
+		previous_id=source.previous_id,
+		context=source.context,
+	)
+
+
+def extract_untranslated(source: Path, output: Path) -> tuple[int, int, int]:
 	with source.open("rb") as source_file:
 		catalog = read_po(source_file)
+
+	existing_messages: dict[tuple[str | None, object], Message] = {}
+	if output.exists():
+		with output.open("rb") as output_file:
+			existing_catalog = read_po(output_file)
+		existing_messages = {
+			(message.context, message.id): message
+			for message in existing_catalog
+			if message.id
+		}
 
 	untranslated_catalog = Catalog(
 		locale=catalog.locale,
@@ -40,25 +77,23 @@ def extract_untranslated(source: Path, output: Path) -> tuple[int, int]:
 	untranslated_catalog.mime_headers = list(catalog.mime_headers)
 
 	included = 0
+	preserved = 0
 	skipped = 0
 	for message in catalog:
 		if not message.id:
+			continue
+
+		existing = existing_messages.get((message.context, message.id))
+		if existing and has_translation(existing):
+			add_message(untranslated_catalog, message, existing)
+			preserved += 1
 			continue
 
 		if not is_untranslated(message):
 			skipped += 1
 			continue
 
-		untranslated_catalog.add(
-			message.id,
-			string=message.string,
-			locations=message.locations,
-			flags=message.flags,
-			auto_comments=message.auto_comments,
-			user_comments=message.user_comments,
-			previous_id=message.previous_id,
-			context=message.context,
-		)
+		add_message(untranslated_catalog, message)
 		included += 1
 
 	output.parent.mkdir(parents=True, exist_ok=True)
@@ -71,7 +106,7 @@ def extract_untranslated(source: Path, output: Path) -> tuple[int, int]:
 			width=None,
 		)
 
-	return included, skipped
+	return included, preserved, skipped
 
 
 def main() -> None:
@@ -80,9 +115,13 @@ def main() -> None:
 	parser.add_argument("output", type=Path, help="Untranslated-only PO output file")
 	args = parser.parse_args()
 
-	included, skipped = extract_untranslated(args.source, args.output)
+	included, preserved, skipped = extract_untranslated(args.source, args.output)
 	print(f"Untranslated PO created at {args.output}")
-	print(f"Included untranslated entries: {included}; skipped translated entries: {skipped}")
+	print(
+		f"Included untranslated entries: {included}; "
+		f"preserved manual translations: {preserved}; "
+		f"skipped translated entries: {skipped}"
+	)
 
 
 if __name__ == "__main__":
