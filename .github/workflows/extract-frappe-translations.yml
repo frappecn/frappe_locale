@@ -59,7 +59,12 @@ jobs:
           cd "$RUNNER_TEMP/frappe-locale-bench"
           bench generate-pot-file --app frappe
 
-          if [ -f "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" ]; then
+          mkdir -p "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale"
+
+          if [ -f "$GITHUB_WORKSPACE/frappe_locale/frappe_locale/locale/$LOCALE.po" ]; then
+            cp "$GITHUB_WORKSPACE/frappe_locale/frappe_locale/locale/$LOCALE.po" \
+              "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/$LOCALE.po"
+          elif [ -f "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" ]; then
             cp "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" \
               "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/$LOCALE.po"
           fi
@@ -75,13 +80,9 @@ jobs:
           cp "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/$LOCALE.po" \
             "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po"
 
-      - name: Build sparse PO for frappe_locale
-        run: |
-          "$RUNNER_TEMP/frappe-locale-bench/env/bin/python" \
-            "$GITHUB_WORKSPACE/scripts/build_sparse_po.py" \
-            "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" \
-            "$GITHUB_WORKSPACE/frappe_locale/frappe_locale/locale/$LOCALE.po" \
-            --locale "$LOCALE"
+          mkdir -p "$GITHUB_WORKSPACE/frappe_locale/frappe_locale/locale"
+          cp "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/$LOCALE.po" \
+            "$GITHUB_WORKSPACE/frappe_locale/frappe_locale/locale/$LOCALE.po"
 
       - name: Validate generated files
         run: |
