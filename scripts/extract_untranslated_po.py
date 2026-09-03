@@ -105,6 +105,7 @@ def extract_untranslated(source: Path, output: Path) -> tuple[int, int, int]:
 			ignore_obsolete=True,
 			width=None,
 		)
+	output.write_bytes(output.read_bytes().rstrip(b"\n") + b"\n")
 
 	return included, preserved, skipped
 
