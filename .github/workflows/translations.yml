@@ -131,6 +131,9 @@ jobs:
           "$RUNNER_TEMP/frappe-locale-bench/env/bin/python" \
             "$GITHUB_WORKSPACE/scripts/extract_untranslated_po.py" \
             "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" \
+            "$GITHUB_WORKSPACE/translations/erpnext/$LOCALE.po" \
+            "$GITHUB_WORKSPACE/translations/hrms/$LOCALE.po" \
+            "$GITHUB_WORKSPACE/translations/crm/$LOCALE.po" \
             "$GITHUB_WORKSPACE/frappe_locale/locale/$LOCALE.po"
 
       - name: 校验生成的文件
