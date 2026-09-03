@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  frappe\n"
 "Report-Msgid-Bugs-To: developers@frappe.io\n"
-"POT-Creation-Date: 2026-09-03 13:00+0000\n"
+"POT-Creation-Date: 2026-09-03 13:35+0000\n"
 "PO-Revision-Date: 2026-08-23 21:22+0000\n"
 "Last-Translator: developers@frappe.io\n"
 "Language: zh_CN\n"
@@ -40601,4 +40601,3 @@ msgstr "PATH中未找到{}！执行备份需要此组件"
 #: frappe/public/js/frappe/file_uploader/WebLink.vue:4
 msgid "← Back to upload files"
 msgstr "返回上传文件"
-
