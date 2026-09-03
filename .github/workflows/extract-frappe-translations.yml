@@ -67,7 +67,6 @@ jobs:
           cd "$RUNNER_TEMP/frappe-locale-bench"
           bench get-app \
             --skip-assets \
-            --soft-link \
             "$GITHUB_WORKSPACE/.sources/erpnext"
 
       - name: Generate and update Frappe and ERPNext translations
