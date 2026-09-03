@@ -17,7 +17,6 @@ jobs:
     name: Extract from Frappe (${{ github.ref_name }})
     runs-on: ubuntu-latest
     env:
-      BENCH_DIR: ${{ runner.temp }}/frappe-locale-bench
       LOCALE: zh
 
     steps:
@@ -49,20 +48,20 @@ jobs:
 
       - name: Create temporary Bench
         run: |
-          bench init "$BENCH_DIR" \
+          bench init "$RUNNER_TEMP/frappe-locale-bench" \
             --skip-assets \
             --skip-redis-config-generation \
             --python "$(which python)" \
             --frappe-path "$GITHUB_WORKSPACE/.sources/frappe"
 
       - name: Generate main.pot and update zh.po
-        working-directory: ${{ env.BENCH_DIR }}
         run: |
+          cd "$RUNNER_TEMP/frappe-locale-bench"
           bench generate-pot-file --app frappe
 
           if [ -f "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" ]; then
             cp "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" \
-              "$BENCH_DIR/apps/frappe/frappe/locale/$LOCALE.po"
+              "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/$LOCALE.po"
           fi
 
           bench update-po-files --app frappe --locale "$LOCALE"
@@ -71,9 +70,9 @@ jobs:
         run: |
           mkdir -p "$GITHUB_WORKSPACE/translations/frappe"
 
-          cp "$BENCH_DIR/apps/frappe/frappe/locale/main.pot" \
+          cp "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/main.pot" \
             "$GITHUB_WORKSPACE/translations/frappe/main.pot"
-          cp "$BENCH_DIR/apps/frappe/frappe/locale/$LOCALE.po" \
+          cp "$RUNNER_TEMP/frappe-locale-bench/apps/frappe/frappe/locale/$LOCALE.po" \
             "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po"
 
       - name: Validate generated files
