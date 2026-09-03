@@ -80,18 +80,18 @@ jobs:
           "$RUNNER_TEMP/frappe-locale-bench/env/bin/python" \
             "$GITHUB_WORKSPACE/scripts/extract_untranslated_po.py" \
             "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po" \
-            "$GITHUB_WORKSPACE/frappe_locale/frappe_locale/locale/$LOCALE.po"
+            "$GITHUB_WORKSPACE/frappe_locale/locale/$LOCALE.po"
 
       - name: Validate generated files
         run: |
           test -s "$GITHUB_WORKSPACE/translations/frappe/main.pot"
           test -s "$GITHUB_WORKSPACE/translations/frappe/$LOCALE.po"
-          test -s "$GITHUB_WORKSPACE/frappe_locale/frappe_locale/locale/$LOCALE.po"
+          test -s "$GITHUB_WORKSPACE/frappe_locale/locale/$LOCALE.po"
           git diff --check
 
       - name: Commit changes
         run: |
-          if [ -z "$(git status --porcelain -- translations/frappe frappe_locale/frappe_locale/locale)" ]; then
+          if [ -z "$(git status --porcelain -- translations/frappe frappe_locale/locale)" ]; then
             echo "No Frappe translation changes detected."
             exit 0
           fi
@@ -102,6 +102,6 @@ jobs:
           git add \
             translations/frappe/main.pot \
             "translations/frappe/$LOCALE.po" \
-            "frappe_locale/frappe_locale/locale/$LOCALE.po"
+            "frappe_locale/locale/$LOCALE.po"
           git commit -m "chore: update Frappe translations"
           git push origin "HEAD:$GITHUB_REF_NAME"
