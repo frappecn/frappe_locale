@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Frappe CRM VERSION\n"
 "Report-Msgid-Bugs-To: shariq@frappe.io\n"
-"POT-Creation-Date: 2026-09-03 14:25+0000\n"
-"PO-Revision-Date: 2026-09-03 14:25+0000\n"
+"POT-Creation-Date: 2026-09-06 13:06+0000\n"
+"PO-Revision-Date: 2026-09-06 13:06+0000\n"
 "Last-Translator: shariq@frappe.io\n"
 "Language-Team: shariq@frappe.io\n"
 "MIME-Version: 1.0\n"
@@ -2809,7 +2809,7 @@ msgstr ""
 msgid "DocType"
 msgstr ""
 
-#: crm/api/doc.py:813
+#: crm/api/doc.py:820
 msgid "Doctype is required"
 msgstr ""
 
@@ -4804,11 +4804,11 @@ msgstr ""
 msgid "Item Group"
 msgstr ""
 
-#: crm/api/doc.py:816
+#: crm/api/doc.py:823
 msgid "Items are required"
 msgstr ""
 
-#: crm/api/doc.py:820
+#: crm/api/doc.py:827
 msgid "Items must be a list"
 msgstr ""
 
@@ -9998,7 +9998,7 @@ msgstr ""
 msgid "kanban"
 msgstr ""
 
-#: crm/api/doc.py:47 crm/api/doc.py:157 crm/api/doc.py:486
+#: crm/api/doc.py:47 crm/api/doc.py:157 crm/api/doc.py:493
 msgid "label"
 msgstr ""
 

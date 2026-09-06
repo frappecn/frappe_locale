@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  frappe\n"
 "Report-Msgid-Bugs-To: developers@frappe.io\n"
-"POT-Creation-Date: 2026-09-03 14:25+0000\n"
+"POT-Creation-Date: 2026-09-06 13:06+0000\n"
 "PO-Revision-Date: 2026-08-23 21:22+0000\n"
 "Last-Translator: developers@frappe.io\n"
 "Language: zh_CN\n"
@@ -73,6 +73,7 @@ msgstr "% 成本分摊"
 #: erpnext/manufacturing/doctype/bom_secondary_item/bom_secondary_item.json
 #: erpnext/stock/doctype/stock_entry_detail/stock_entry_detail.json
 #: erpnext/subcontracting/doctype/subcontracting_receipt_item/subcontracting_receipt_item.json
+#, python-format
 msgid "% of FG Cost"
 msgstr "% 成品成本"
 
@@ -284,6 +285,10 @@ msgstr "成品转换分录必须消耗工单 {1} 的生产物料 {0}。"
 msgid "A finished good conversion entry must have the purpose 'Repack'."
 msgstr "成品转换分录的用途必须是 'Repack'。"
 
+#: frappe/core/doctype/file/file.py:120 frappe/core/doctype/file/file.py:172
+msgid "A folder cannot have a File URL"
+msgstr ""
+
 #: frappe/public/js/frappe/list/list_filter/layout_dialog.js:245
 msgid "A layout with this name already exists"
 msgstr "已存在同名布局"
@@ -329,7 +334,7 @@ msgstr "生成此项目的采购收货单前，必须完成质量检验。"
 msgid "A section can have up to {0} columns"
 msgstr "一个区段最多可以有 {0} 列"
 
-#: erpnext/stock/doctype/material_request/material_request.js:477
+#: erpnext/stock/doctype/material_request/material_request.js:496
 msgid "A separate Purchase Order is created for each Supplier."
 msgstr "每个供应商都会创建一个单独的采购订单。"
 
@@ -1884,7 +1889,7 @@ msgstr "确定要取消此交易的对账吗？"
 msgid "Arrange"
 msgstr "排列"
 
-#: frappe/public/js/frappe/ui/sidebar/arrangement_editor.js:184
+#: frappe/public/js/frappe/ui/sidebar/arrangement_editor.js:190
 msgid "Arranging"
 msgstr "正在排列"
 
@@ -2430,7 +2435,7 @@ msgstr "后台同步频率"
 #. Name of a DocType
 #. Label of a Sidebar Item
 #: frappe/core/doctype/background_task/background_task.json
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:162
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:142
 #: frappe/system/sidebar/system/system.json
 msgid "Background Task"
 msgstr "后台任务"
@@ -2440,8 +2445,9 @@ msgstr "后台任务"
 msgid "Background Task {0} not found"
 msgstr "未找到后台任务 {0}"
 
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:36
-#: frappe/public/js/frappe/ui/sidebar/sidebar.js:790
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:11
+#: frappe/public/js/frappe/ui/sidebar/dock.js:115
+#: frappe/public/js/frappe/ui/sidebar/sidebar.js:780
 msgid "Background Tasks"
 msgstr "后台任务"
 
@@ -2667,7 +2673,7 @@ msgid "Batch Split"
 msgstr "批次拆分"
 
 #. Name of a report
-#: erpnext/stock/doctype/batch/batch.js:57
+#: erpnext/stock/doctype/batch/batch.js:59
 #: erpnext/stock/report/batch_split_tree/batch_split_tree.json
 msgid "Batch Split Tree"
 msgstr "批次拆分树"
@@ -3561,6 +3567,7 @@ msgstr "检查供应商发票编号唯一性"
 #. Description of the 'Not Applicable' (Check) field in DocType 'Item Tax
 #. Template Detail'
 #: erpnext/accounts/doctype/item_tax_template_detail/item_tax_template_detail.json
+#, python-format
 msgid "Check if this tax is not applicable to items (distinct from 0% rate)"
 msgstr "检查此税费是否不适用于物料（不同于 0% 费率）"
 
@@ -3575,6 +3582,10 @@ msgstr "检查账户 {1} 的第 {0} 行：只有应收账款或应付账款账�
 #: erpnext/accounts/doctype/journal_entry_template/journal_entry_template.py:79
 msgid "Check row {0} for account {1}: Party is only allowed if Party Type is set"
 msgstr "检查账户 {1} 的第 {0} 行：只有设置了参与方类型时才允许填写参与方"
+
+#: frappe/core/page/dashboard_view/dashboard_view.js:83
+msgid "Check the link, or open one from the dashboard list."
+msgstr ""
 
 #: hrms/hr/doctype/employee_checkin/employee_checkin_list.js:50
 msgid "Checking In..."
@@ -3670,7 +3681,7 @@ msgstr "Chromium 渲染器不可用"
 msgid "Chromium unavailable: this format uses a Typst block."
 msgstr "Chromium 不可用：此格式使用 Typst 块。"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:252
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:261
 msgid "Circular dependency detected: {0}"
 msgstr "检测到循环依赖：{0}"
 
@@ -3730,7 +3741,7 @@ msgstr "通过银行清账工具将清账日期从 {0} 更改为 {1}"
 msgid "Clearance date updated"
 msgstr "清账日期已更新"
 
-#: frappe/public/js/frappe/views/dashboard/dashboard_view.js:197
+#: frappe/public/js/frappe/views/dashboard/dashboard_view.js:198
 msgid "Click Customize to add your first widget."
 msgstr "单击“自定义”添加第一个小组件。"
 
@@ -4488,6 +4499,10 @@ msgstr "无法在 {0} 上自动创建 Frappe CRM 自定义字段。如果它运�
 msgid "Could not detect any tables in this PDF. It may be a scanned or image-based statement, which is not supported (no OCR)."
 msgstr "无法在此 PDF 中检测到任何表格。它可能是扫描版或基于图像的对账单，而当前不支持此类文件（无 OCR）。"
 
+#: frappe/public/js/frappe/widgets/chart_widget.js:166
+msgid "Could not draw this chart: {0}"
+msgstr ""
+
 #: frontend/src/components/Modals/DealModal.vue:156
 #: frontend/src/components/Modals/LeadModal.vue:125
 #: frontend/src/components/Modals/OrganizationModal.vue:133
@@ -4606,7 +4621,7 @@ msgstr "无法将报表更新至"
 msgid "Could not update the header row."
 msgstr "无法更新标题行。"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:561
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:544
 msgid "Could not validate {0}: {1}"
 msgstr "无法验证 {0}：{1}"
 
@@ -5240,6 +5255,10 @@ msgstr "数据库表"
 #: frontend/src/components/Settings/DashboardSettings.vue:70
 msgid "Dashboard Currency"
 msgstr "仪表板货币"
+
+#: frappe/core/page/dashboard_view/dashboard_view.js:86
+msgid "Dashboard List"
+msgstr ""
 
 #: frontend/src/components/Settings/DashboardSettings.vue:74
 msgid "Dashboard number cards & charts will show currency in the selected format. Once set, cannot be edited."
@@ -6094,7 +6113,7 @@ msgstr "所有人的停靠栏已更新"
 msgid "Doctype To Sync"
 msgstr "要同步的 DocType"
 
-#: crm/api/doc.py:813
+#: crm/api/doc.py:820
 msgid "Doctype is required"
 msgstr "必须填写 DocType"
 
@@ -6674,7 +6693,7 @@ msgid "Embed"
 msgstr "嵌入"
 
 #: hrms/patches/v16_0/create_custom_field_for_employee_advance_in_employee_master.py:11
-#: hrms/setup.py:328
+#: hrms/setup.py:339
 msgid "Employee Advance Account"
 msgstr "员工预收账户"
 
@@ -6733,6 +6752,10 @@ msgstr "员工离职（今年）"
 #: hrms/workspace_sidebar/shift_&_attendance.json
 msgid "Employee Hours Utilization"
 msgstr "员工工时利用率"
+
+#: hrms/hr/doctype/employee_onboarding/employee_onboarding.py:64
+msgid "Employee Onboarding: {0} already exists for Job Offer: {1}"
+msgstr ""
 
 #: hrms/hr/doctype/employee_referral/employee_referral.py:56
 msgid "Employee Referral {0} already exists for email: {1}"
@@ -7409,7 +7432,7 @@ msgstr "例如：如果交易金额为 200，则计算结果为 {} = {}"
 msgid "Examples:"
 msgstr "示例："
 
-#: erpnext/manufacturing/doctype/work_order/services/required_items.py:243
+#: erpnext/manufacturing/doctype/work_order/services/required_items.py:246
 msgid "Exceeds Pending Qty"
 msgstr "超出待处理数量"
 
@@ -7421,7 +7444,7 @@ msgstr "超出申请数量"
 msgid "Excess Disassembly"
 msgstr "超量拆解"
 
-#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:359
+#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:245
 msgid "Excess Material Transfer"
 msgstr "超量物料转移"
 
@@ -7907,7 +7930,7 @@ msgstr "会在该客户的销售订单和发票中自动获取。"
 msgid "Fetching fields…"
 msgstr "正在获取字段……"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:478
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:460
 msgid "Field '{0}' is not a valid Account field"
 msgstr "字段“{0}”不是有效的账户字段"
 
@@ -7927,7 +7950,7 @@ msgstr "字段模板"
 msgid "Field \\u201c{0}\\u201d no longer exists on {1}"
 msgstr "字段“{0}”在 {1} 上已不存在"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:471
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:453
 msgid "Field and operator must be strings"
 msgstr "字段和运算符必须是字符串"
 
@@ -8011,11 +8034,11 @@ msgstr "按金额筛选"
 msgid "Filter items..."
 msgstr "筛选物料……"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:466
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:448
 msgid "Filter must be [field, operator, value]"
 msgstr "筛选器必须是 [字段、运算符、值]"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:505
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:487
 msgid "Filter must be a list or dict"
 msgstr "筛选器必须是列表或字典"
 
@@ -8291,7 +8314,7 @@ msgstr "表单"
 msgid "Forms can only map to: {0}"
 msgstr "表单只能映射到：{0}"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:361
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:351
 msgid "Formula evaluation error: {0}"
 msgstr "公式评估错误：{0}"
 
@@ -8299,7 +8322,7 @@ msgstr "公式评估错误：{0}"
 msgid "Formula has unbalanced parentheses"
 msgstr "公式的括号不匹配"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:398
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:388
 msgid "Formula must return a numeric value, got {0}"
 msgstr "公式必须返回数值，但得到的是 {0}"
 
@@ -8312,10 +8335,6 @@ msgstr "公式或账户筛选器"
 #: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:341
 msgid "Formula references itself ('{0}')"
 msgstr "公式引用了自身（“{0}”）"
-
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:351
-msgid "Formula references undefined codes: {0}"
-msgstr "公式引用了未定义的代码：{0}"
 
 #: hrms/payroll/report/employee_ctc_break_up/employee_ctc_break_up.py:260
 msgid "Formula/Amount"
@@ -8863,6 +8882,10 @@ msgstr "您想如何开始？"
 msgid "How it reads on the rail."
 msgstr "它在侧边栏中的显示方式。"
 
+#: hrms/public/js/setup_wizard.js:44
+msgid "How many employees do you have?"
+msgstr ""
+
 #: frontend/src/pages/PersonaForm.vue:108
 msgid "How many people will use Frappe CRM?"
 msgstr "有多少人会使用 Frappe CRM？"
@@ -9314,6 +9337,7 @@ msgid "In source"
 msgstr "在源代码中"
 
 #: banking/src/components/features/BankReconciliation/Rules/RuleForm.tsx:753
+#, python-format
 msgid "In this case, the amount will be calculated as 25% of the transaction amount. If the transaction amount is 200, then this will be calculated as 200 * 0.25 = 50."
 msgstr "在这种情况下，金额将按交易金额的 25% 计算。如果交易金额为 200，则计算结果为 200 * 0.25 = 50。"
 
@@ -9698,6 +9722,10 @@ msgstr "GeoJSON 无效"
 msgid "Invalid JSON"
 msgstr "JSON 无效"
 
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:431
+msgid "Invalid JSON format: {0}"
+msgstr ""
+
 #: erpnext/accounts/doctype/pos_settings/pos_settings.py:111
 msgid "Invalid POS Field"
 msgstr "POS 字段无效"
@@ -9724,8 +9752,8 @@ msgstr "读数无效"
 msgid "Invalid Snippet"
 msgstr "代码片段无效"
 
-#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:47
-#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:69
+#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:43
+#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:65
 msgid "Invalid Source and Target Warehouse"
 msgstr "源仓库和目标仓库无效"
 
@@ -9854,7 +9882,7 @@ msgstr "提供的线索详细信息无效。"
 msgid "Invalid line reference format: '{0}'. Must start with letter and contain only letters, numbers, underscores, and hyphens"
 msgstr "行引用格式无效：“{0}”。必须以字母开头，且只能包含字母、数字、下划线和连字符"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:481
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:463
 msgid "Invalid operator '{0}'"
 msgstr "运算符“{0}”无效"
 
@@ -10072,6 +10100,14 @@ msgstr "规则已评估"
 #: erpnext/selling/doctype/selling_settings/selling_settings.json
 msgid "Is Sales Order required to create Sales Invoice/Delivery Note?"
 msgstr "创建销售发票/交货单是否需要销售订单？"
+
+#: frappe/utils/island.py:47
+msgid "Island \"{0}\" is not declared. Add it to ui_islands in the hooks.py of the app."
+msgstr ""
+
+#: frappe/utils/island.py:54
+msgid "Island \"{0}\" points at bundle \"{1}\", but \"{2}\" is not in assets.json. Build the app that ships it."
+msgstr ""
 
 #. Description of the 'Is Rate Adjustment Entry (Debit Note)' (Check) field in
 #. DocType 'Sales Invoice'
@@ -10297,11 +10333,11 @@ msgstr "物料：{0}，库存计量单位：{1}，不能有小数形式的工艺
 msgid "Items To Be Received"
 msgstr "待收货物料"
 
-#: crm/api/doc.py:816
+#: crm/api/doc.py:823
 msgid "Items are required"
 msgstr "需要物料"
 
-#: crm/api/doc.py:820
+#: crm/api/doc.py:827
 msgid "Items must be a list"
 msgstr "物料必须是列表"
 
@@ -10372,6 +10408,14 @@ msgstr "作业卡 {0}：根据工单 {1} 中的工序顺序，请先完成工序
 #: erpnext/manufacturing/doctype/job_card/job_card.py:1563
 msgid "Job Card {0}: As per the sequence of the operations in the work order {1}, submit the manufacturing entry for the operation {2} before the operation {3}."
 msgstr "作业卡 {0}：根据工单 {1} 中的工序顺序，请先提交工序 {2} 的制造条目，再提交工序 {3} 的制造条目。"
+
+#: hrms/overrides/employee_master.py:67
+msgid "Job Offer Status Not Updated"
+msgstr ""
+
+#: hrms/hr/doctype/job_offer/job_offer.py:60
+msgid "Job Offer {0} already exists for {1}"
+msgstr ""
 
 #. Label of a number card in the Recruitment Workspace
 #: hrms/recruitment/workspace/recruitment/recruitment.json
@@ -10639,6 +10683,10 @@ msgstr "了解资产"
 msgid "Learn Subcontracting"
 msgstr "了解分包"
 
+#: hrms/public/js/setup_wizard.js:96
+msgid "Leave & Attendance"
+msgstr ""
+
 #. Label of a chart in the Leaves Workspace
 #: hrms/leaves/workspace/leaves/leaves.json
 msgid "Leave Applications by Type"
@@ -10795,9 +10843,9 @@ msgstr "限制"
 msgid "Line Reference"
 msgstr "行引用"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:284
-msgid "Line References undefined in Formula: {0}"
-msgstr "公式中未定义行引用：{0}"
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:293
+msgid "Line references undefined in {0}: {1}"
+msgstr ""
 
 #. Label of the link_priority_order (Table) field in DocType 'CRM Enrichment
 #. Settings'
@@ -10808,6 +10856,10 @@ msgstr "链接优先级顺序"
 #: crm/fcrm/doctype/crm_product/reconcile_job.py:79
 msgid "Linked Item {0} no longer exists"
 msgstr "关联物料 {0} 不再存在"
+
+#: hrms/overrides/employee_master.py:64
+msgid "Linked Job Offer {0} was {1}. Please update the Job Offer status if this hire was intended."
+msgstr ""
 
 #. Label of the linkedin (Data) field in DocType 'CRM Deal'
 #. Label of the linkedin (Data) field in DocType 'CRM Lead'
@@ -10868,15 +10920,15 @@ msgstr "区域设置"
 msgid "Log ID"
 msgstr "日志 ID"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:489
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:471
 msgid "Logical condition must have exactly one operator"
 msgstr "逻辑条件必须恰好包含一个运算符"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:497
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:479
 msgid "Logical conditions need at least 1 sub-condition"
 msgstr "逻辑条件至少需要一个子条件"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:493
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:475
 msgid "Logical operators must be 'and' or 'or'"
 msgstr "逻辑运算符必须是“and”或“or”"
 
@@ -10909,7 +10961,7 @@ msgstr "长文本（自动换行）"
 msgid "Long-term Provisions"
 msgstr "长期准备金"
 
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:199
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:179
 msgid "Looks like there are no background tasks running or completed recently."
 msgstr "似乎目前没有正在运行或最近完成的后台任务。"
 
@@ -11320,6 +11372,10 @@ msgstr "消息（默认，无图标）"
 msgid "Messaging CRM Campaign"
 msgstr "消息传递 CRM 活动"
 
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:541
+msgid "Method '{0}' must be whitelisted and permit GET requests"
+msgstr ""
+
 #: erpnext/manufacturing/doctype/workstation/workstation.py:490
 msgid "Method {0} is not allowed to be run on a Job Card."
 msgstr "不允许在作业卡上运行方法 {0}。"
@@ -11376,7 +11432,8 @@ msgstr "自入职日期起申请此请假所需的最少日历天数"
 msgid ""
 "Minimum quantity should be as per Stock UOM\n"
 "\n"
-msgstr "最小数量应根据库存计量单位设置\n"
+msgstr ""
+"最小数量应根据库存计量单位设置\n"
 "\n"
 
 #. Description of the 'Safety Stock' (Float) field in DocType 'Item'
@@ -11867,7 +11924,7 @@ msgstr "无匹配"
 msgid "No Mobile Number Set"
 msgstr "未设置手机号码"
 
-#: frappe/public/js/frappe/ui/notifications/notifications.js:397
+#: frappe/public/js/frappe/ui/notifications/notifications.js:380
 msgid "No New Notifications"
 msgstr "没有新通知"
 
@@ -11998,7 +12055,7 @@ msgstr "由于以下原因，没有可创建的考勤记录"
 msgid "No availability of slots are found. Please add on Appointment Booking Settings."
 msgstr "未找到可用时段。请在预约设置中添加。"
 
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:198
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:178
 msgid "No background tasks"
 msgstr "无后台任务"
 
@@ -12018,7 +12075,7 @@ msgstr "未找到银行交易"
 msgid "No barcode value — set one in the panel"
 msgstr "无条码值——请在面板中设置一个"
 
-#: frappe/public/js/frappe/views/dashboard/dashboard_view.js:196
+#: frappe/public/js/frappe/views/dashboard/dashboard_view.js:197
 msgid "No charts or cards yet"
 msgstr "尚无图表或卡片"
 
@@ -12049,6 +12106,10 @@ msgstr "尚未添加联系人"
 #: erpnext/accounts/doctype/process_statement_of_accounts/process_statement_of_accounts.js:164
 msgid "No customers found with selected options."
 msgstr "未找到符合所选选项的客户。"
+
+#: frappe/core/page/dashboard_view/dashboard_view.js:82
+msgid "No dashboard named {0}"
+msgstr ""
 
 #: frontend/src/components/Activities/Activities.vue:768
 msgid "No data fields have been added yet."
@@ -12328,7 +12389,7 @@ msgstr "未选择源表"
 msgid "No stock available for Item {0} in Warehouse {1}"
 msgstr "仓库 {1} 中没有物料 {0} 的库存"
 
-#: erpnext/stock/doctype/batch/batch.js:103
+#: erpnext/stock/doctype/batch/batch.js:111
 msgid "No stock available for this batch."
 msgstr "此批次没有可用库存。"
 
@@ -12651,7 +12712,7 @@ msgstr "通知类型"
 msgid "Notification Type Preference"
 msgstr "通知类型偏好"
 
-#: frappe/public/js/frappe/ui/notifications/notifications.js:165
+#: frappe/public/js/frappe/ui/notifications/notifications.js:169
 msgid "Notification categories"
 msgstr "通知类别"
 
@@ -12947,7 +13008,7 @@ msgstr "只有拥有这些角色之一的用户可以发送短信。留空则仅
 msgid "Only works for Purchase Receipt, Purchase Invoice and Stock Entry"
 msgstr "仅适用于采购收货单、采购发票和库存交易"
 
-#: erpnext/manufacturing/doctype/work_order/services/required_items.py:240
+#: erpnext/manufacturing/doctype/work_order/services/required_items.py:243
 msgid "Only {0} {1} of {2} is pending in Work Order {3}."
 msgstr "工单 {3} 中的 {2} 仅有 {0} {1} 待处理。"
 
@@ -13114,7 +13175,7 @@ msgstr "工序 {0} 在工单 {1} 中重复添加。请选择工序行。"
 msgid "Operation {0} is longer than any available working hours in workstation {1}, break down the operation into multiple operations"
 msgstr "工序 {0} 的时长超过工作站 {1} 中任何可用工作时间，请将该工序拆分为多个工序"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:484
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:466
 msgid "Operator '{0}' requires a list value"
 msgstr "运算符“{0}”需要列表值"
 
@@ -13732,6 +13793,10 @@ msgstr "此物料针对销售/采购订单允许超额开票的百分比。未�
 #: erpnext/stock/doctype/item/item.json
 msgid "Percentage by which over-delivery or over-receipt is allowed against a Sales/Purchase Order for this item. If not set, value from Stock Settings will be used."
 msgstr "此物料针对销售/采购订单允许超额交付或超额收货的百分比。未设置时，将使用库存设置中的值。"
+
+#: hrms/public/js/setup_wizard.js:104
+msgid "Performance Management"
+msgstr ""
 
 #: erpnext/accounts/doctype/period_closing_voucher/period_closing_voucher.py:633
 msgid "Period Closing Voucher {0} GL Entry Cancellation Failed"
@@ -15030,7 +15095,7 @@ msgstr "数量容差"
 msgid "Quantity for Item {0} must be greater than zero and cannot exceed {1}"
 msgstr "物料 {0} 的数量必须大于零且不能超过 {1}"
 
-#: erpnext/stock/doctype/material_request/material_request.js:565
+#: erpnext/stock/doctype/material_request/material_request.js:584
 msgctxt "<b>${pending_qty}</b>"
 msgid "Quantity for Item {0} must be greater than zero and cannot exceed {1}"
 msgstr "物料 {0} 的数量必须大于零且不能超过 {1}"
@@ -15214,6 +15279,10 @@ msgstr "收件人和状态"
 #: banking/src/components/features/BankReconciliation/MatchAndReconcile.tsx:734
 msgid "Recommended Action"
 msgstr "建议操作"
+
+#: erpnext/public/js/bank_reconciliation_tool/dialog_manager.js:688
+msgid "Reconciliation Failed"
+msgstr ""
 
 #: banking/src/components/features/ActionLog/ActionLog.tsx:32
 #: banking/src/components/features/ActionLog/ActionLogDialog.tsx:19
@@ -16156,6 +16225,7 @@ msgid "Route Signature"
 msgstr "路由签名"
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.py:824
+#, python-format
 msgid "Row #{0}: % of FG Cost needs a BOM secondary item. Choose Valuation Rate or Manual for {1}."
 msgstr "第 {0} 行：成品成本的百分比需要 BOM 次级物料。请为 {1} 选择“计价率”或“手动”。"
 
@@ -16199,7 +16269,7 @@ msgstr "第 {0} 行：不能创建税务单据链接和预扣税单据链接不�
 msgid "Row #{0}: Cannot delete item {1} which is already ordered against this Sales Order."
 msgstr "第 {0} 行：无法删除已针对该销售订单订购的物料 {1}。"
 
-#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:349
+#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:235
 msgid "Row #{0}: Cannot transfer {1} {2} of Item {3}. Maximum transferable quantity is {4} {2}."
 msgstr "第 {0} 行：无法转移物料 {3} 的 {1} {2}。最大可转移数量为 {4} {2}。"
 
@@ -16340,6 +16410,7 @@ msgid "Row #{0}: Please use a different Finance Book."
 msgstr "第 {0} 行：请使用其他财务账簿。"
 
 #: erpnext/manufacturing/doctype/bom/bom.py:451
+#, python-format
 msgid "Row #{0}: Process Loss Percentage should be less than 100% for {1} Item {2}"
 msgstr "第 {0} 行：{1} 物料 {2} 的工艺损耗百分比应小于 100%"
 
@@ -16391,11 +16462,11 @@ msgstr ""
 msgid "Row #{0}: Serial No {1} cannot be returned since it was not transacted in original invoice {2}"
 msgstr "第 {0} 行：序列号 {1} 不能退回，因为它未在原始发票 {2} 中发生交易"
 
-#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:44
+#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:40
 msgid "Row #{0}: Source and Target Warehouse cannot be the same for Material Transfer"
 msgstr "第 {0} 行：物料转移的源仓库和目标仓库不能相同"
 
-#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:66
+#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:62
 msgid "Row #{0}: Source, Target Warehouse and Inventory Dimensions cannot be the exact same for Material Transfer"
 msgstr "第 {0} 行：物料转移的源仓库、目标仓库和库存维度不能完全相同"
 
@@ -16578,7 +16649,7 @@ msgstr "第 {0} 行：{2} 中账户 {1} 的全部费用金额已分配。"
 msgid "Row {0}: The item {1}, quantity must be a positive number"
 msgstr "第 {0} 行：物料 {1} 的数量必须是正数"
 
-#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:103
+#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:99
 msgid "Row {0}: Transferred quantity cannot be greater than the requested quantity."
 msgstr "第 {0} 行：转移数量不能大于请求数量。"
 
@@ -17214,7 +17285,7 @@ msgstr "选择提供商"
 msgid "Select Source Type"
 msgstr "选择源类型"
 
-#: erpnext/stock/doctype/material_request/material_request.js:449
+#: erpnext/stock/doctype/material_request/material_request.js:468
 msgid "Select Supplier for Items"
 msgstr "为物料选择供应商"
 
@@ -17228,7 +17299,7 @@ msgid "Select Workday"
 msgstr "选择工作日"
 
 #: erpnext/stock/doctype/material_request/mapper.py:243
-#: erpnext/stock/doctype/material_request/material_request.js:553
+#: erpnext/stock/doctype/material_request/material_request.js:572
 msgid "Select a Supplier for Item {0}"
 msgstr "为物料 {0} 选择供应商"
 
@@ -17283,7 +17354,7 @@ msgid "Select an option"
 msgstr "选择选项"
 
 #: erpnext/stock/doctype/material_request/mapper.py:224
-#: erpnext/stock/doctype/material_request/material_request.js:540
+#: erpnext/stock/doctype/material_request/material_request.js:559
 msgid "Select at least one Item"
 msgstr "至少选择一个物料"
 
@@ -17664,7 +17735,7 @@ msgstr "从子装配中设置运营成本/次级物料"
 msgid "Set Supplier"
 msgstr "设置供应商"
 
-#: erpnext/stock/doctype/material_request/material_request.js:456
+#: erpnext/stock/doctype/material_request/material_request.js:475
 msgid "Set Supplier for All Items"
 msgstr "为所有物料设置供应商"
 
@@ -18451,7 +18522,7 @@ msgid "Source Stock Entry {0} has no finished goods quantity"
 msgstr "源库存交易 {0} 没有成品数量"
 
 #: erpnext/stock/doctype/stock_entry/services/material_receipt_issue.py:40
-#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:27
+#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:23
 msgid "Source Warehouse is required for item {0}"
 msgstr "物料 {0} 必须填写源仓库"
 
@@ -19203,7 +19274,8 @@ msgstr "系统生成"
 msgid ""
 "System will use the latest saved Currency Exchange rate on or before the transaction date, however old it is. <br>\n"
 "Uncheck to ignore rates older than Stale Days and fetch a fresh rate from the exchange rate provider instead."
-msgstr "系统将使用交易日期当天或之前最近保存的汇率，无论该汇率有多旧。<br>\n"
+msgstr ""
+"系统将使用交易日期当天或之前最近保存的汇率，无论该汇率有多旧。<br>\n"
 "取消选中可忽略早于过期天数的汇率，并改为从汇率提供商获取最新汇率。"
 
 #. Description of the 'Tax Withholding Category' (Link) field in DocType
@@ -19258,7 +19330,7 @@ msgid "Target Value"
 msgstr "目标值"
 
 #: erpnext/stock/doctype/stock_entry/services/material_receipt_issue.py:26
-#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:25
+#: erpnext/stock/doctype/stock_entry/services/material_transfer.py:21
 msgid "Target Warehouse is required for item {0}"
 msgstr "物料 {0} 必须填写目标仓库"
 
@@ -19716,7 +19788,8 @@ msgstr "以下无效定价规则已删除：{0}"
 msgid ""
 "The following payment schedule(s) already exist:\n"
 "{0}"
-msgstr "以下付款计划已存在：\n"
+msgstr ""
+"以下付款计划已存在：\n"
 "{0}"
 
 #: erpnext/assets/doctype/asset_repair/asset_repair.py:115
@@ -20157,11 +20230,11 @@ msgstr "此功能已弃用，可能会在未来版本中移除"
 msgid "This field is required"
 msgstr "此字段为必填项"
 
-#: frappe/core/doctype/file/file.py:698
+#: frappe/core/doctype/file/file.py:702
 msgid "This file cannot be deleted as it is set in field {0} in row {1} of {2} {3}. Clear the field first."
 msgstr "此文件无法删除，因为它已设置在 {2} {3} 的第 {1} 行的字段 {0} 中。请先清空该字段。"
 
-#: frappe/core/doctype/file/file.py:694
+#: frappe/core/doctype/file/file.py:698
 msgid "This file cannot be deleted as it is set in field {0} of {1} {2}. Clear the field first."
 msgstr "此文件无法删除，因为它已设置在 {1} {2} 的字段 {0} 中。请先清空该字段。"
 
@@ -21344,7 +21417,7 @@ msgstr "无法翻译 CSS：{0}"
 msgid "Up Next"
 msgstr "接下来"
 
-#: frappe/public/js/frappe/ui/notifications/notifications.js:591
+#: frappe/public/js/frappe/ui/notifications/notifications.js:574
 msgid "Upcoming events"
 msgstr "即将到来的事件"
 
@@ -21394,6 +21467,10 @@ msgstr "出勤记录 {3} 中日期 {2} 的另一半状态已从 {0} 更新为 {1
 #: frontend/src/components/Settings/Hierarchy/Hierarchy.vue:470
 msgid "Updated reports to"
 msgstr "报表已更新为"
+
+#: hrms/overrides/employee_master.py:90
+msgid "Updated the status of Job Offer {0} for {1} to {2}"
+msgstr ""
 
 #: erpnext/accounts/doctype/account_category/account_category.py:55
 msgid "Updated {0} Financial Report Row(s) with new category name"
@@ -21686,6 +21763,7 @@ msgstr "物料 {0} 的计价方法必须设置为“标准成本”。"
 #. Description of the 'Valuation Type' (Select) field in DocType 'BOM Secondary
 #. Item'
 #: erpnext/manufacturing/doctype/bom_secondary_item/bom_secondary_item.json
+#, python-format
 msgid "Valuation Rate and Manual value this item on its own and deduct that cost from the raw material cost, like the pre-v16 scrap items. % of FG Cost allocates a percentage of the remaining raw material cost."
 msgstr "估值率和手动计价会单独计算此物料的价值，并从原材料成本中扣除该成本，类似 v16 之前的废料物料。成品成本百分比会分配剩余原材料成本的一定百分比。"
 
@@ -21814,7 +21892,7 @@ msgstr "查看账户覆盖范围"
 msgid "View All Prices"
 msgstr "查看所有价格"
 
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:213
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:193
 msgid "View All Tasks"
 msgstr "查看所有任务"
 
@@ -22116,6 +22194,10 @@ msgstr "欢迎！请登录以继续。"
 #: frontend/src/pages/PersonaForm.vue:87
 msgid "What are your biggest challenges with sales today?"
 msgstr "您目前在销售方面面临的最大挑战是什么？"
+
+#: hrms/public/js/setup_wizard.js:73
+msgid "What do you use for HR today?"
+msgstr ""
 
 #: erpnext/public/js/setup_wizard.js:69
 msgid "What do you use today?"
@@ -22649,7 +22731,7 @@ msgstr "您没有足够权限访问 Frappe CRM。如果您认为这是错误，�
 msgid "You do not have permission to access Frappe CRM"
 msgstr "无权访问 Frappe CRM"
 
-#: frappe/core/doctype/file/file.py:232
+#: frappe/core/doctype/file/file.py:236
 msgid "You do not have permission to access this file"
 msgstr "无权访问此文件"
 
@@ -22698,7 +22780,7 @@ msgstr "无权删除此附件"
 msgid "You don't have permission to print: {0}"
 msgstr "无权打印：{0}"
 
-#: frappe/utils/file_manager.py:410
+#: frappe/utils/file_manager.py:418
 msgid "You don't have permission to read/attach the file {0}."
 msgstr "无权读取/附加文件 {0}。"
 
@@ -22731,7 +22813,7 @@ msgstr "您已申请此职位。"
 msgid "You have entered a duplicate Delivery Note on row {0}. Please rectify and try again."
 msgstr "第 {0} 行输入了重复的交货单。请修正后重试。"
 
-#: frappe/public/js/frappe/ui/notifications/notifications.js:398
+#: frappe/public/js/frappe/ui/notifications/notifications.js:381
 msgid "You have no new notifications"
 msgstr "没有新通知"
 
@@ -22818,7 +22900,7 @@ msgstr "需要工作区管理员才能查看侧边栏的站点层。"
 msgid "You need to cancel POS Closing Entry {0} to be able to cancel this document."
 msgstr "要取消此文档，必须先取消 POS 结账条目 {0}。"
 
-#: frappe/utils/file_manager.py:402
+#: frappe/utils/file_manager.py:410
 msgid "You need write permissions to add attachments to this record."
 msgstr "需要写入权限才能向此记录添加附件。"
 
@@ -22904,7 +22986,7 @@ msgstr "零余额日记账：{0}"
 msgid "Zero-Quantity Line Items"
 msgstr "零数量行项目"
 
-#: frappe/core/doctype/file/file.py:748 frappe/core/doctype/file/file.py:766
+#: frappe/core/doctype/file/file.py:752 frappe/core/doctype/file/file.py:770
 msgid "Zip file extracts to more than the maximum allowed size of {0} MB"
 msgstr "ZIP 文件解压后的大小超过允许的最大值 {0} MB"
 
@@ -22924,6 +23006,13 @@ msgstr "放大"
 #: frappe/public/js/print_format_builder/PrintFormatBuilder.vue:21
 msgid "Zoom out"
 msgstr "缩小"
+
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:419
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:429
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:539
+msgctxt "Financial Report Template"
+msgid "[{0}] {1}"
+msgstr ""
 
 #: frappe/custom/doctype/property_setter/property_setter.py:157
 msgid "`doctype` and `fieldname` are required for deleting property setters."
@@ -23360,7 +23449,7 @@ msgstr "{0} 不能设置为隐藏字段"
 msgid "{0} can't be used as a layout break"
 msgstr "{0} 不能用作布局分隔"
 
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:168
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:148
 msgid "{0} cancelled"
 msgstr "{0} 已取消"
 
@@ -23376,7 +23465,7 @@ msgstr "{0} 不能大于 100"
 msgid "{0} cannot be used as an accounting dimension as it is not a standalone document type."
 msgstr "{0} 不能用作会计维度，因为它不是独立的文档类型。"
 
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:166
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:146
 msgid "{0} completed"
 msgstr "{0} 已完成"
 
@@ -23445,7 +23534,7 @@ msgstr "已获取 {0} 个条目"
 msgid "{0} excluded (not payable)"
 msgstr "{0} 个已排除（无需付款）"
 
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:167
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:147
 msgid "{0} failed"
 msgstr "{0} 个失败"
 
@@ -23645,18 +23734,6 @@ msgstr "{0} 现在是标准项，已导出到 {1}。"
 msgid "{0} is on hold until {1}"
 msgstr "{0} 暂停至 {1}"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:421
-msgid "{0} is required for Account Data"
-msgstr "账户数据需要填写 {0}"
-
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:314
-msgid "{0} is required for Calculated Amount"
-msgstr "计算金额需要填写 {0}"
-
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:193
-msgid "{0} is required for {1}"
-msgstr "{0} 是 {1} 的必填项"
-
 #: erpnext/public/js/utils/party.js:88 erpnext/public/js/utils/party.js:190
 #: erpnext/public/js/utils/party.js:202 erpnext/public/js/utils/party.js:249
 #: erpnext/public/js/utils/party.js:261
@@ -23666,6 +23743,10 @@ msgstr "要应用税费，必须填写 {0}。请设置 {0}，然后再次选择 
 #: erpnext/manufacturing/doctype/production_plan/services/material_request.py:181
 msgid "{0} is required to get raw materials when {1} is set."
 msgstr "设置 {1} 时，需要填写 {0} 才能获取原材料。"
+
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:193
+msgid "{0} is required when {1} is {2}"
+msgstr ""
 
 #: frappe/printing/doctype/print_format/print_format.js:117
 msgid "{0} is the default print format for {1}. Disabling it will remove it as the default. Do you want to continue?"
@@ -23768,7 +23849,7 @@ msgstr "{0} 个应用模块不属于任何层级"
 msgid "{0} pending job cards"
 msgstr "{0} 个待处理作业卡"
 
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:164
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:144
 msgid "{0} queued"
 msgstr "{0} 个排队中"
 
@@ -23800,11 +23881,11 @@ msgstr "{0} 个已选中"
 msgid "{0} ships no dock yet. Export one to the app first."
 msgstr "{0} 尚未提供 Dock。请先将一个 Dock 导出到应用。"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:541
+#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:523
 msgid "{0} should be in format: app.module.method"
 msgstr "{0} 应采用以下格式：app.module.method"
 
-#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:165
+#: frappe/public/js/frappe/ui/background_tasks/background_tasks.js:145
 msgid "{0} started"
 msgstr "{0} 已开始"
 
@@ -23913,7 +23994,12 @@ msgstr "{0} {1} 不影响银行账户 {2}"
 msgid "{0} {1} not allowed to be reposted. You can enable it by adding it '{2}' table in {3}."
 msgstr "{0} {1} 不允许重新过账。您可以在 {3} 的“{2}”表中添加它以启用此功能。"
 
+#: erpnext/public/js/bank_reconciliation_tool/dialog_manager.js:692
+msgid "{0} {1} was submitted but could not be reconciled against Bank Transaction {2}. Match it manually from the Bank Reconciliation Tool."
+msgstr ""
+
 #: frontend/src/components/Questionnaire.vue:92
+#, python-format
 msgid "{0}% complete"
 msgstr "{0}% 已完成"
 
@@ -23949,17 +24035,9 @@ msgstr "{0}。请查看错误日志了解详情。"
 msgid "{0}: Child table (auto-deleted with parent)"
 msgstr "{0}：子表（随父项自动删除）"
 
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:448
-msgid "{0}: Invalid JSON format: {1}"
-msgstr "{0}：无效 JSON 格式：{1}"
-
 #: frappe/website/doctype/web_form/web_form.py:124
 msgid "{0}: Link field cannot reference DocType {1} without Guest read permission"
 msgstr "{0}：链接字段无法引用 DocType {1}，因为没有访客读取权限"
-
-#: erpnext/accounts/doctype/financial_report_template/financial_report_validation.py:557
-msgid "{0}: Method '{1}' must be whitelisted and permit GET requests"
-msgstr "{0}：方法“{1}”必须加入白名单并允许 GET 请求"
 
 #: erpnext/setup/doctype/transaction_deletion_record/transaction_deletion_record.py:532
 msgid "{0}: Not found"

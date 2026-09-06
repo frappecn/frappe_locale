@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  frappe\n"
 "Report-Msgid-Bugs-To: shariq@frappe.io\n"
-"POT-Creation-Date: 2026-09-03 14:25+0000\n"
+"POT-Creation-Date: 2026-09-06 13:06+0000\n"
 "PO-Revision-Date: 2026-07-16 11:02+0000\n"
 "Last-Translator: shariq@frappe.io\n"
 "Language: zh_CN\n"
@@ -2804,7 +2804,7 @@ msgstr ""
 msgid "DocType"
 msgstr "文档类型"
 
-#: crm/api/doc.py:813
+#: crm/api/doc.py:820
 msgid "Doctype is required"
 msgstr ""
 
@@ -4799,11 +4799,11 @@ msgstr "系统将强制要求填写商机的“预期关闭日期”和“预期
 msgid "Item Group"
 msgstr ""
 
-#: crm/api/doc.py:816
+#: crm/api/doc.py:823
 msgid "Items are required"
 msgstr ""
 
-#: crm/api/doc.py:820
+#: crm/api/doc.py:827
 msgid "Items must be a list"
 msgstr ""
 
@@ -9992,7 +9992,7 @@ msgstr "刚刚"
 msgid "kanban"
 msgstr "看板"
 
-#: crm/api/doc.py:47 crm/api/doc.py:157 crm/api/doc.py:486
+#: crm/api/doc.py:47 crm/api/doc.py:157 crm/api/doc.py:493
 msgid "label"
 msgstr "标签"
 
